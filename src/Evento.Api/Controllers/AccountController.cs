@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Evento.Infrastructure.Commands.Users;
 using Evento.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Evento.Api.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : ApiControllerBase
     {
         private readonly IUserService _userService;
 
@@ -17,12 +18,10 @@ namespace Evento.Api.Controllers
             _userService = userService;
         }
 
-
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Get()
-        {
-            throw new NotImplementedException();
-        }
+            => Json(await _userService.GetAccountAsync(UserId));
 
         [HttpGet("tickets")]
         public async Task<IActionResult> GetTickets()
@@ -41,8 +40,6 @@ namespace Evento.Api.Controllers
 
         [HttpPost("login")]
         public async Task<IActionResult> Post(Login login)
-        {
-            throw new NotImplementedException();
-        }
+            => Json(await _userService.LoginAsync(login.Email, login.Password));
     }
 }
