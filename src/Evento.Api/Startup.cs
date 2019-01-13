@@ -35,15 +35,19 @@ namespace Evento.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddJsonOptions(x => x.SerializerSettings.Formatting = Formatting.Indented).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddAuthorization(x => x.AddPolicy("HasAdminRole", p => p.RequireRole("admin")));
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IEventService, EventService>();
             services.AddScoped<IUserService, UserService>();
             services.AddSingleton<IJwtHandler, JwtHandler>();
+            services.Configure<JwtSettings>(options => Configuration.GetSection("JwtSettings").Bind(options));
             services.AddSingleton(AutoMapperConfig.Initialize());
-            services.Configure<JwtSettings>(Configuration.GetSection("jwt"));
 
-            var jwtsetting = Configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
+            //services.Configure<JwtSettings>(Configuration.GetSection("jwt"));
+
+            var jwtsetting =
+                Configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
 
 
             var tokenValidationParameters = new TokenValidationParameters

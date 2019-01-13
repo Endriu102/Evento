@@ -30,7 +30,7 @@ namespace Evento.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Post(Register command)
+        public async Task<IActionResult> Post([FromBody]Register command)
         {
             await _userService.RegisterAsync(Guid.NewGuid(), command.Email, command.Name, command.Password,
                 command.Role);
@@ -39,7 +39,7 @@ namespace Evento.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Post(Login login)
+        public async Task<IActionResult> Post([FromBody]Login login)
             => Json(await _userService.LoginAsync(login.Email, login.Password));
     }
 }
