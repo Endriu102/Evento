@@ -8,7 +8,7 @@ namespace Evento.Infrastructure.DTO
 
         public int Seating { get;  set; }
 
-        public decimal Price { get; }
+        public decimal Price { get; set; }
 
         public Guid? UserId { get;  set; }
 

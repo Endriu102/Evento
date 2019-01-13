@@ -8,7 +8,7 @@ namespace Evento.Core.Domain
 
         public int Seating { get; protected set; }
 
-        public decimal Price { get; }
+        public decimal Price { get; protected set; }
 
         public Guid? UserId { get; protected set; }
 

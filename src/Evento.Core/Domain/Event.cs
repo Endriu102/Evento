@@ -90,17 +90,20 @@ namespace Evento.Core.Domain
 
         public void CancelPurchasedTickets(User user, int amount)
         {
-            var tickets = PurchasedTickets.Where(x => x.UserId == user.Id);
+            var tickets = GetPurchasedTicketByUser(user);
 
             if (tickets.Count() < amount)
             {
                 throw new Exception($"User cannot cancel more tickets {amount} than he has.");
             }
 
-            foreach (var ticket in tickets)
+            foreach (var ticket in tickets.Take(amount))
             {
                 ticket.Cancel();
             }
         }
+
+        public IEnumerable<Ticket> GetPurchasedTicketByUser(User user)
+            => PurchasedTickets.Where(x => x.UserId == user.Id);
     }
 }
