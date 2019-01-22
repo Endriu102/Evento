@@ -19,6 +19,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace Evento.Api
 {
@@ -45,8 +47,6 @@ namespace Evento.Api
             services.Configure<JwtSettings>(options => Configuration.GetSection("JwtSettings").Bind(options));
             services.AddSingleton(AutoMapperConfig.Initialize());
 
-            //services.Configure<JwtSettings>(Configuration.GetSection("jwt"));
-
             var jwtsetting =
                 Configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
 
@@ -68,8 +68,11 @@ namespace Evento.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddNLog();
+            env.ConfigureNLog("nlog.config");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

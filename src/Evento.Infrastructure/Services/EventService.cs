@@ -7,6 +7,9 @@ using Evento.Core.Domain;
 using Evento.Core.Repositories;
 using Evento.Infrastructure.DTO;
 using Evento.Infrastructure.Extensions;
+using Microsoft.Extensions.Logging;
+using NLog;
+using ILogger = Microsoft.Extensions.Logging.ILogger;
 
 namespace Evento.Infrastructure.Services
 {
@@ -14,6 +17,7 @@ namespace Evento.Infrastructure.Services
     {
         private readonly IEventRepository _eventRepository;
         private readonly IMapper _mapper;
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public EventService(IEventRepository eventRepository, IMapper mapper)
         {
@@ -37,6 +41,9 @@ namespace Evento.Infrastructure.Services
 
         public async Task<IEnumerable<EventDTO>> BrowseAsync(string name = null)
         {
+            Logger.Trace("Dupa");
+            Logger.Info("Dupa");
+
             var events = await _eventRepository.BrowseAsync(name);
 
             return _mapper.Map<IEnumerable<EventDTO>>(events);

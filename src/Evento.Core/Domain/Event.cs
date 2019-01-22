@@ -36,10 +36,20 @@ namespace Evento.Core.Domain
             Id = id;
            SetName(name);
             SetDescription(description);
+            SetDates(startDate, endDate);
+                        CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void SetDates(DateTime startDate, DateTime endDate)
+        {
+            if (startDate >= endDate)
+            {
+                throw new Exception($"Event with id: {Id} must have start date earlier than end date.");
+            }
+
             StartDate = startDate;
             EndDate = endDate;
-            CreatedAt = DateTime.UtcNow;
-            UpdatedAt = DateTime.UtcNow;
         }
 
         public void SetName(string name)
