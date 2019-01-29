@@ -9,6 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evento.Core", "src\Evento.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evento.Infrastructure", "src\Evento.Infrastructure\Evento.Infrastructure.csproj", "{3B945FBB-654F-465A-8346-4C600E9EFB26}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evento.Tests", "Tests\Evento.Tests\Evento.Tests.csproj", "{5BEA8E74-A58C-4526-A31F-43AA55A54F9C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C78FDF29-24B2-4BA8-9E82-F52895505984} = {C78FDF29-24B2-4BA8-9E82-F52895505984}
+		{3B945FBB-654F-465A-8346-4C600E9EFB26} = {3B945FBB-654F-465A-8346-4C600E9EFB26}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evento.Tests.EndToEnd", "Tests\Evento.Tests.EndToEnd\Evento.Tests.EndToEnd.csproj", "{A94B7DC3-6321-4AEE-A15D-53AF24001140}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +35,14 @@ Global
 		{3B945FBB-654F-465A-8346-4C600E9EFB26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B945FBB-654F-465A-8346-4C600E9EFB26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B945FBB-654F-465A-8346-4C600E9EFB26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BEA8E74-A58C-4526-A31F-43AA55A54F9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BEA8E74-A58C-4526-A31F-43AA55A54F9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BEA8E74-A58C-4526-A31F-43AA55A54F9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BEA8E74-A58C-4526-A31F-43AA55A54F9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A94B7DC3-6321-4AEE-A15D-53AF24001140}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A94B7DC3-6321-4AEE-A15D-53AF24001140}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A94B7DC3-6321-4AEE-A15D-53AF24001140}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A94B7DC3-6321-4AEE-A15D-53AF24001140}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
