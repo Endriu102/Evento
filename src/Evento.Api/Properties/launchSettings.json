@@ -25,6 +25,11 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "JwtSettings": {
+      "key": "super_secret_123!",
+      "issuer": "https://localhost:44321",
+      "expiryMinutes": 60
     }
   }
 }
