@@ -32,9 +32,15 @@ namespace Evento.Api
         public IConfiguration Configuration { get; }
         public IContainer Container { get; private set; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -57,7 +63,6 @@ namespace Evento.Api
             builder.RegisterType<TicketService>().As<ITicketService>().InstancePerLifetimeScope();
             builder.RegisterType<JwtHandler>().As<IJwtHandler>().SingleInstance();
             Container = builder.Build();
-
 
             var jwtsetting =
                 Configuration.GetSection(nameof(JwtSettings)).Get<JwtSettings>();
